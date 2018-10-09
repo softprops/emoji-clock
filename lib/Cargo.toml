@@ -8,7 +8,7 @@ homepage = "https://github.com/softprops/emoji-clock"
 repository = "https://github.com/softprops/emoji-clock"
 keywords = ["emoji", "clock"]
 license = "MIT"
-readme = "README.md"
+readme = "../README.md"
 
 [dependencies]
 chrono = "0.4"
