@@ -1,0 +1,8 @@
+[package]
+name = "emoji-clock"
+version = "0.1.0"
+authors = ["softprops <d.tangren@gmail.com>"]
+
+[dependencies]
+chrono = "0.4"
+maplit = "1.0"
