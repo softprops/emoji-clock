@@ -1,12 +1,14 @@
 extern crate chrono;
 #[macro_use]
 extern crate maplit;
+#[macro_use]
+extern crate lazy_static;
 
 use chrono::{Local, Timelike};
+use std::collections::HashMap;
 
-fn main() {
-    let now = Local::now();
-    let dials = hashmap!(
+lazy_static! {
+    static ref DIALS: HashMap<(u32, bool), char> = hashmap!(
         (1, true) => '🕐',
         (1, false) => '🕑',
         (2, true) => '🕝',
@@ -29,12 +31,16 @@ fn main() {
         (10, false) => '🕣',
         (11, true) => '🕚',
         (11, false) => '🕦',
-        (12, true) =>> '🕛',
-        (12, false) =>> '🕧'
+        (12, true) => '🕛',
+        (12, false) => '🕧'
     );
+}
+
+fn main() {
+    let now = Local::now();
     println!(
         "{}",
-        dials
+        DIALS
             .get(&(now.hour12().1, now.minute() < 30))
             .cloned()
             .unwrap_or_else(|| '⌛')
