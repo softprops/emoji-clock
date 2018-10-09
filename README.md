@@ -1,4 +1,4 @@
-# emoji clock
+# emoji clock [![Build Status](https://travis-ci.org/softprops/emoji-clock.svg?branch=master)](https://travis-ci.org/softprops/emoji-clock)
 
 > 🕒 🐇 an emoji clock to make sure you're never late
 
