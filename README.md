@@ -20,6 +20,8 @@ $ cargo install emoji-clock-cli
 
 ## 🤸 usage
 
+The following is the output of the cli's help flag. Enjoy.
+
 ```sh
 $ emojiclock --help
 emoji-clock 0.0.0
@@ -38,6 +40,49 @@ FLAGS:
 ARGS:
     <time>    An expression similar to expression that can be provided to GNU date -d expr -
               http://man7.org/linux/man-pages/man1/date.1.html#DATE_STRING [default: now]
+```
+
+### specifying time
+
+By default `emojiclock` will print out the emoji clock closet to "now" but you can also provide
+a time that's relative to "now" in roughly english form ( as supported by the [chrono-english crate](https://crates.io/crates/chrono-english) ) as an argument.
+
+```sh
+for hour in `seq 1 12`; do emojiclock "$hour hours"; done
+🕡
+🕢
+🕣
+🕣
+🕣
+🕦
+🕧
+🕜
+🕝
+🕞
+🕟
+🕠
+```
+
+### clipboard
+
+It's often the case that you don't just want to see the current time in emoji but
+you want to capture it to use elsewhere. Use the `-c` ( or `--copy` ) flag to copy the output
+to your clipboard
+
+```sh
+$ emojiclock -c
+# paste it somewhere nice
+```
+
+### which 12 hours
+
+Sometimes having context for a.m. or p.m. Is nice. You can always open your window
+and see but when that's not convenient enough pass the `-m` ( or `--meridiem` ) flag to capture that context
+
+```sh
+$ emojiclock -m
+emojiclock -m
+🕠🌙
 ```
 
 Doug Tangren (softprops) 2018
