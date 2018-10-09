@@ -12,6 +12,6 @@ readme = "README.md"
 
 [dependencies]
 chrono = "0.4"
-structopt = "0.2"
 chrono-english = "0.1"
 emoji-clock = { version= "0.1.0", path = "../lib" }
+structopt = "0.2"
