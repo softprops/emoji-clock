@@ -12,11 +12,11 @@ use std::fmt;
 use chrono::Timelike;
 
 lazy_static! {
-  static ref DIALS: HashMap<(u32, bool), char> = hashmap!(
+    static ref DIALS: HashMap<(u32, bool), char> = hashmap!(
         (1, true) => '🕐',
         (1, false) => '🕜',
         (2, true) => '🕑',
-        (2, false) => '🕑',
+        (2, false) => '🕝',
         (3, true) => '🕒',
         (3, false) => '🕞',
         (4, true) => '🕓',
@@ -42,38 +42,38 @@ lazy_static! {
 
 /// Renders a clock in emoji
 pub enum Clock<T> {
-  /// Dial with 12 hour time
-  Dial(T),
-  /// Dial with 12 hour time and a.m/p.m indication ( 🌞/🌙 )
-  DialCtx(T),
+    /// Dial with 12 hour time
+    Dial(T),
+    /// Dial with 12 hour time and a.m/p.m indication ( 🌞/🌙 )
+    DialCtx(T),
 }
 
 impl<T> fmt::Display for Clock<T>
 where
-  T: Timelike,
+    T: Timelike,
 {
-  fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-    match self {
-      Clock::Dial(time) => write!(
-        f,
-        "{}",
-        DIALS
-          .get(&(time.hour12().1, time.minute() < 30))
-          .cloned()
-          .unwrap_or_else(|| '⌛')
-      ),
-      Clock::DialCtx(time) => {
-        let (is_pm, hour) = time.hour12();
-        write!(
-          f,
-          "{}{}",
-          DIALS
-            .get(&(hour, time.minute() < 30))
-            .cloned()
-            .unwrap_or_else(|| '⌛'),
-          if is_pm { '🌙' } else { '🌞' }
-        )
-      }
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Clock::Dial(time) => write!(
+                f,
+                "{}",
+                DIALS
+                    .get(&(time.hour12().1, time.minute() < 30))
+                    .cloned()
+                    .unwrap_or_else(|| '⌛')
+            ),
+            Clock::DialCtx(time) => {
+                let (is_pm, hour) = time.hour12();
+                write!(
+                    f,
+                    "{}{}",
+                    DIALS
+                        .get(&(hour, time.minute() < 30))
+                        .cloned()
+                        .unwrap_or_else(|| '⌛'),
+                    if is_pm { '🌙' } else { '🌞' }
+                )
+            }
+        }
     }
-  }
 }
