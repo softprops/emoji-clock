@@ -6,9 +6,11 @@ extern crate maplit;
 #[macro_use]
 extern crate lazy_static;
 
+// Std lib
 use std::collections::HashMap;
 use std::fmt;
 
+// Third party
 use chrono::Timelike;
 
 lazy_static! {

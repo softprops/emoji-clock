@@ -4,10 +4,12 @@ extern crate emoji_clock;
 extern crate structopt;
 extern crate chrono_english;
 
+// Third party
 use chrono::Local;
 use chrono_english::{parse_date_string, Dialect};
 use structopt::StructOpt;
 
+// Ours
 use emoji_clock::Clock;
 
 #[derive(StructOpt, PartialEq, Debug)]
