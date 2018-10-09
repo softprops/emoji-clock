@@ -4,9 +4,8 @@ extern crate emoji_clock;
 extern crate structopt;
 extern crate chrono_english;
 
-use chrono_english::{parse_date_string, Dialect};
-
 use chrono::Local;
+use chrono_english::{parse_date_string, Dialect};
 use structopt::StructOpt;
 
 use emoji_clock::Clock;
@@ -18,20 +17,30 @@ use emoji_clock::Clock;
 )]
 struct Options {
     #[structopt(
-        help = "an expression similar to GNU date -d expr - http://man7.org/linux/man-pages/man1/date.1.html#DATE_STRING. defaults to 'now'"
+        help = "an expression similar to GNU date -d expr - http://man7.org/linux/man-pages/man1/date.1.html#DATE_STRING. defaults to 'now'",
+        default_value = "now"
     )]
-    time: Option<String>,
+    time: String,
+    #[structopt(
+        short = "c",
+        long = "ctx",
+        help = "adds a sun/moon indicator for what half of the day this time falls within"
+    )]
+    ctx: bool,
 }
 
 fn main() {
     match Options::from_args() {
-        Options { time } => {
-            let t = time
-                .map(|time| {
-                    parse_date_string(&time, Local::now(), Dialect::Us).expect("invalid date")
-                })
-                .unwrap_or_else(Local::now);
-            println!("{}", Clock::Dial(t));
-        }
+        Options { time, ctx } => match parse_date_string(&time, Local::now(), Dialect::Us) {
+            Ok(wound) => println!(
+                "{}",
+                if ctx {
+                    Clock::DialCtx(wound)
+                } else {
+                    Clock::Dial(wound)
+                }
+            ),
+            Err(err) => eprintln!("{}", err),
+        },
     }
 }
