@@ -14,26 +14,37 @@ use chrono::{Local, Timelike};
 /// Renders a clock in emoji
 pub enum Clock {
     Dial(char),
-    DialCtx(char, char)
+    DialCtx(char, char),
 }
 
 impl Clock {
     /// Return a 12 hour clock dial
-    pub fn new<T>(time: &T) -> Clock where T: Timelike {
-        Clock::Dial(DIALS
-            .get(&(time.hour12().1, time.minute() < 30))
-            .cloned()
-            .unwrap_or_else(|| '⌛'))
+    pub fn new<T>(time: &T) -> Clock
+    where
+        T: Timelike,
+    {
+        Clock::Dial(
+            DIALS
+                .get(&(time.hour12().1, time.minute() < 30))
+                .cloned()
+                .unwrap_or_else(|| '⌛'),
+        )
     }
 
     /// Return a 12 hour clock dial with indication of the before/after
     /// midnight
-    pub fn with_ctx<T>(time: &T) -> Clock where T: Timelike {
+    pub fn with_ctx<T>(time: &T) -> Clock
+    where
+        T: Timelike,
+    {
         let (is_pm, hour) = time.hour12();
-        Clock::DialCtx(DIALS
-            .get(&(hour, time.minute() < 30))
-            .cloned()
-            .unwrap_or_else(|| '⌛'), if is_pm { '🌙' } else { '🌞' })
+        Clock::DialCtx(
+            DIALS
+                .get(&(hour, time.minute() < 30))
+                .cloned()
+                .unwrap_or_else(|| '⌛'),
+            if is_pm { '🌙' } else { '🌞' },
+        )
     }
 }
 
@@ -41,7 +52,7 @@ impl fmt::Display for Clock {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Clock::Dial(face) => write!(f, "{}", face),
-            Clock::DialCtx(face, ctx) => write!(f, "{}{}", face, ctx)
+            Clock::DialCtx(face, ctx) => write!(f, "{}{}", face, ctx),
         }
     }
 }
@@ -75,10 +86,6 @@ lazy_static! {
     );
 }
 
-
 fn main() {
-    println!(
-        "{}",
-        Clock::with_ctx(&Local::now())
-    )
+    println!("{}", Clock::with_ctx(&Local::now()))
 }
