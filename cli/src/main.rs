@@ -3,10 +3,12 @@ extern crate emoji_clock;
 #[macro_use]
 extern crate structopt;
 extern crate chrono_english;
+extern crate clipboard;
 
 // Third party
 use chrono::Local;
 use chrono_english::{parse_date_string, Dialect};
+use clipboard::{ClipboardContext, ClipboardProvider};
 use structopt::StructOpt;
 
 // Ours
@@ -19,29 +21,44 @@ use emoji_clock::Clock;
 )]
 struct Options {
     #[structopt(
-        help = "an expression similar to GNU date -d expr - http://man7.org/linux/man-pages/man1/date.1.html#DATE_STRING. defaults to 'now'",
+        help = "An expression similar to expression that can be provided to GNU date -d expr - http://man7.org/linux/man-pages/man1/date.1.html#DATE_STRING",
         default_value = "now"
     )]
     time: String,
     #[structopt(
-        short = "c",
-        long = "ctx",
-        help = "adds a sun/moon indicator for what half of the day this time falls within"
+        short = "m",
+        long = "meridiem",
+        help = "Adds an indicator for what half of the day this time falls within (ante meridiem or post meridiem)"
     )]
-    ctx: bool,
+    meridiem: bool,
+    #[structopt(
+        short = "c",
+        long = "copy",
+        help = "Copies to clipboard (where possible)"
+    )]
+    copy: bool,
 }
 
 fn main() {
     match Options::from_args() {
-        Options { time, ctx } => match parse_date_string(&time, Local::now(), Dialect::Us) {
-            Ok(wound) => println!(
-                "{}",
-                if ctx {
-                    Clock::DialCtx(wound)
+        Options {
+            time,
+            meridiem,
+            copy,
+        } => match parse_date_string(&time, Local::now(), Dialect::Us) {
+            Ok(wound) => {
+                let dial = if meridiem {
+                    Clock::DialMeridiem(wound)
                 } else {
                     Clock::Dial(wound)
+                };
+                if copy {
+                    if let Ok(mut clipboard) = ClipboardContext::new() {
+                        drop(clipboard.set_contents(format!("{}", dial)));
+                    }
                 }
-            ),
+                println!("{}", dial);
+            }
             Err(err) => eprintln!("{}", err),
         },
     }

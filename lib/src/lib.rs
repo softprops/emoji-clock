@@ -47,7 +47,7 @@ pub enum Clock<T> {
     /// Dial with 12 hour time
     Dial(T),
     /// Dial with 12 hour time and a.m/p.m indication ( 🌞/🌙 )
-    DialCtx(T),
+    DialMeridiem(T),
 }
 
 impl<T> fmt::Display for Clock<T>
@@ -64,7 +64,7 @@ where
                     .cloned()
                     .unwrap_or_else(|| '⌛')
             ),
-            Clock::DialCtx(time) => {
+            Clock::DialMeridiem(time) => {
                 let (is_pm, hour) = time.hour12();
                 write!(
                     f,
