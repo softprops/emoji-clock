@@ -2,7 +2,7 @@
 name = "emoji-clock"
 version = "0.1.0"
 authors = ["softprops <d.tangren@gmail.com>"]
-description = "Rust interface for Github"
+description = "Emoji clock"
 documentation = "https://softprops.github.io/emoji-clock"
 homepage = "https://github.com/softprops/emoji-clock"
 repository = "https://github.com/softprops/emoji-clock"
