@@ -1,0 +1,19 @@
+[package]
+name = "emoji-clock-cli"
+version = "0.1.0"
+authors = ["softprops <d.tangren@gmail.com>"]
+description = "Rust interface for Github"
+documentation = "https://softprops.github.io/emoji-clock"
+homepage = "https://github.com/softprops/emoji-clock"
+repository = "https://github.com/softprops/emoji-clock"
+keywords = ["emoji", "clock"]
+license = "MIT"
+readme = "README.md"
+
+[dependencies]
+chrono = "0.4"
+lazy_static = "1.1"
+maplit = "1.0"
+structopt = "0.2"
+chrono-english = "0.1"
+emoji-clock = { version= "0.1.0", path = "../lib" }
