@@ -44,7 +44,7 @@ ARGS:
 
 ### specifying time
 
-By default `emojiclock` will print out the emoji clock closet to "now" but you can also provide
+By default, `emojiclock` will print out the emoji clock closet to "now" but you can also provide
 a time that's relative to "now" in roughly english form ( as supported by the [chrono-english crate](https://crates.io/crates/chrono-english) ) as an argument.
 
 ```sh
@@ -76,8 +76,8 @@ $ emojiclock -c
 
 ### which 12 hours
 
-Sometimes having context for a.m. or p.m. Is nice. You can always open your apartment window
-and see, but when that's not convenient enough pass the `-m` ( or `--meridiem` ) flag to capture that context
+Sometimes having context for a.m. or p.m is useful. You can always open your apartment window
+and see for yourself, but when that's not convenient enough pass the `-m` ( or `--meridiem` ) flag to capture that context
 
 ```sh
 $ emojiclock -m
