@@ -6,7 +6,7 @@
 
 Long ago people used clocks to tell time. These clocks had faces 😯 with hands 👐 and people
 could easily read them at a glance. Minutes mattered less than hours. These were mostly
-replaced with digial clocks with numbers. Today, we half emoji!
+replaced with digial clocks with numbers. Today, we have emoji!
 
 ## 📦 install
 
@@ -76,8 +76,8 @@ $ emojiclock -c
 
 ### which 12 hours
 
-Sometimes having context for a.m. or p.m. Is nice. You can always open your window
-and see but when that's not convenient enough pass the `-m` ( or `--meridiem` ) flag to capture that context
+Sometimes having context for a.m. or p.m. Is nice. You can always open your apartment window
+and see, but when that's not convenient enough pass the `-m` ( or `--meridiem` ) flag to capture that context
 
 ```sh
 $ emojiclock -m
