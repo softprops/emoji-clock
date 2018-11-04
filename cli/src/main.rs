@@ -15,10 +15,7 @@ use structopt::StructOpt;
 use emoji_clock::Clock;
 
 #[derive(StructOpt, PartialEq, Debug)]
-#[structopt(
-    name = "emoji-clock",
-    about = "renders time as an emoji clock"
-)]
+#[structopt(name = "emoji-clock", about = "renders time as an emoji clock")]
 struct Options {
     #[structopt(
         help = "An expression similar to expression that can be provided to GNU date -d expr - http://man7.org/linux/man-pages/man1/date.1.html#DATE_STRING",

@@ -54,7 +54,10 @@ impl<T> fmt::Display for Clock<T>
 where
     T: Timelike,
 {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    fn fmt(
+        &self,
+        f: &mut fmt::Formatter,
+    ) -> fmt::Result {
         match self {
             Clock::Dial(time) => write!(
                 f,

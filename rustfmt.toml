@@ -1,0 +1,2 @@
+# https://github.com/rust-lang-nursery/rustfmt/blob/master/Configurations.md#fn_args_density
+fn_args_density = "Vertical"
